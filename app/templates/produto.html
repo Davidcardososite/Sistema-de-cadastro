@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Cadastrar Produto</title>
+</head>
+<body>
+    <h2>Dados do Produto</h2>
+    <form method="post" action="/produto?id_cliente={{ id_cliente }}">
+        
+        <input type="text" id="produto" name="produto" placeholder="Produto:" required=""><br>
+        
+        <input type="text" id="tipo" name="tipo" placeholder="Tipo:" required=""><br>
+        
+        <input type="text" id="valor" name="valor" placeholder="Valor:" required=""><br>
+        
+        <input type="text" id="estoque" name="estoque" placeholder="Estoque:" required=""><br>
+        
+        <input type="submit" value="Próximo">
+    </form>
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+</body>
+</html>

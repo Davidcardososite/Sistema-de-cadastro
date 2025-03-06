@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Editar Produto</title>
+</head>
+<body>
+    <h1>Editar Produto</h1>
+    <form method="post" action="">
+        <label for="produto">Produto</label>
+        <input type="text" id="produto" name="produto" value="{{ produto.produto }}" required><br>
+        
+        <label for="tipo">Tipo</label>
+        <input type="text" id="tipo" name="tipo" value="{{ produto.tipo }}" required><br>
+        
+        <label for="preco">Preço</label>
+        <input type="text" id="preco" name="preco" value="{{ produto.valor }}" required><br>
+        
+        <label for="estoque">Estoque</label>
+        <input type="text" id="estoque" name="estoque" value="{{ produto.estoque }}" required><br>
+        <input type="submit" value="Salvar">
+    </form>
+    
+    <a class="links2" href="{{ url_for('auth.pesquisar') }}">Voltar</a>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Pesquisar Cliente</title>
+</head>
+<body>
+    <h1>Pesquisar Cliente</h1>
+    <form class="form1" method="post" action="/pesquisar?id_cliente={{ id_cliente }}&id_produto={{ id_produto }}">
+        <input placeholder="Nome" type="text" id="nome" name="nome" required>
+        <button type="submit">
+            <img src="{{ url_for('static', filename='imagens/pesquisar.png') }}" >
+        </button>
+        </form>
+    <a class="links" href="{{ url_for('auth.dashboard') }}">Inicio</a>
+
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+
+    {% if resultados_cliente %}
+        <h2>Resultados da Pesquisa - Cliente</h2>
+        <table border="1">
+            <tr>
+                <th bgcolor="#EEE8AA">ID</th>
+                <th bgcolor="#EEE8AA">RG</th>
+                <th bgcolor="#EEE8AA">CPF</th>
+                <th bgcolor="#EEE8AA">Nome</th>
+                <th bgcolor="#EEE8AA">Sobrenome</th>
+                <th bgcolor="#EEE8AA">Telefone</th>
+                <th bgcolor="#EEE8AA">Rua</th>
+                <th bgcolor="#EEE8AA">Número</th>
+                <th bgcolor="#EEE8AA">Bairro</th>
+                <th>Opção</th>
+            </tr>
+            {% for cliente in resultados_cliente %}
+            <tr>
+                <td bgcolor="#EEE8AA">{{ cliente.id }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.rg }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.cpf }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.nome }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.sobrenome }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.telefone }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.rua }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.numero }}</td>
+                <td bgcolor="#EEE8AA">{{ cliente.bairro }}</td>
+                <td>
+                    <a class="links4" href="{{ url_for('auth.editar_cliente', id=cliente.id) }}">Atualizar</a>
+                    <form action="{{ url_for('auth.deletar_cliente', id=cliente.id) }}" method="post" style="display:inline;">
+                        <input id="deletar" type="submit" value="Deletar" onclick="return confirm('Tem certeza que deseja deletar este cliente?');">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <h3>Produtos</h3>
+                    <table border="1">
+                        <tr>
+                            <th bgcolor="#E6E6FA">ID</th>
+                            <th bgcolor="#E6E6FA">Produto</th>
+                            <th bgcolor="#E6E6FA">Tipo</th>
+                            <th bgcolor="#E6E6FA">Preço R$</th>
+                            <th bgcolor="#E6E6FA">Estoque</th>
+                            <th bgcolor="#EEE8AA">ID Cliente</th>
+                            <th>Opção</th>
+                        </tr>
+                        {% for produto in resultados_produto[cliente.id] %}
+                        <tr>
+                            <td bgcolor="#E6E6FA">{{ produto.id }}</td>
+                            <td bgcolor="#E6E6FA">{{ produto.produto }}</td>
+                            <td bgcolor="#E6E6FA">{{ produto.tipo }}</td>
+                            <td bgcolor="#E6E6FA">{{ produto.valor }}</td>
+                            <td bgcolor="#E6E6FA">{{ produto.estoque }}</td>
+                            <td bgcolor="#EEE8AA">{{ produto.id }}</td>
+                            <td>
+                                <a class="links4" href="{{ url_for('auth.editar_produto', id=produto.id) }}">Atualizar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                    <h3>Vendas</h3>
+                    <table border="1">
+                        <tr>
+                            <th bgcolor="#ADD8E6">ID</th>
+                            <th bgcolor="#EEE8AA">ID Cliente</th>
+                            <th bgcolor="#E6E6FA">ID Produto</th>
+                            <th bgcolor="#ADD8E6">Data da Compra</th>
+                            <th bgcolor="#ADD8E6">Quantidade</th>
+                            <th>Opção</th>
+                        </tr>
+                        {% for venda in resultados_venda[cliente.id] %}
+                        <tr>
+                            <td bgcolor="#ADD8E6">{{ venda.id }}</td>
+                            <td bgcolor="#EEE8AA">{{ venda.id_cliente }}</td>
+                            <td bgcolor="#E6E6FA">{{ venda.id_produto }}</td>
+                            <td bgcolor="#ADD8E6">{{ venda.data_compra }}</td>
+                            <td bgcolor="#ADD8E6">{{ venda.quantidade }}</td>
+                            <td>
+                                <a class="links4" href="{{ url_for('auth.editar_venda', id=venda.id) }}">Atualizar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

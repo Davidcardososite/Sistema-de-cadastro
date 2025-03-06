@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<html lang="pt-br">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Editar Venda</title>
+</head>
+<body>
+    <h1>Editar Venda</h1>
+    <form method="post" action="">
+        <label for="quantidade">Quantidade</label>
+        <input type="text" id="quantidade" name="quantidade" value="{{ venda.quantidade }}" required><br>
+        
+        <input type="submit" value="Salvar">
+    </form>
+    <a class="links2" href="{{ url_for('auth.pesquisar') }}">Voltar</a>
+</body>
+</html>

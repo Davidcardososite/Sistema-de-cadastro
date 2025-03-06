@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Dashboard</title>
+    
+</head>
+<body>
+    <h1>Bem vindo {{ name }}, esse é seu sistema de cadastro!</h1>
+    <ul>
+        <li><a href="{{ url_for('auth.cadastrar') }}">Cadastrar Cliente, Produto e Venda</a></li>
+        <li><a href="{{ url_for('auth.pesquisar') }}">Pesquisar Cliente</a></li>
+    </ul>
+</body>
+</html>

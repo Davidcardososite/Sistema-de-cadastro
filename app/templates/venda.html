@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Cadastrar venda</title>
+</head>
+<body>
+    <h2>Dados da Venda</h2>
+    <form method="post" action="/venda?id_cliente={{ id_cliente }}&id_produto={{ id_produto }}">
+
+        <input type="text" id="quantidade" name="quantidade" placeholder="Quantidade:" required=""><br>
+        
+        
+        <input type="submit" value="Concluir">
+    </form>
+    <a href="{{ url_for('auth.dashboard') }}">Inicio</a>
+    {% if msg %}
+        <div class="vendas">{{ msg }}</div>
+    {% endif %}
+</body>
+</html>
